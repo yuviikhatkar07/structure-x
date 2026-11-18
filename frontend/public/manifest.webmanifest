@@ -1,0 +1,12 @@
+{
+  "name": "STRUCTURE X — Advanced Disaster Inspection System",
+  "short_name": "STRUCTURE X",
+  "description": "Command and control for the STRUCTURE X inspection rover",
+  "start_url": "/control",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0B0C0E",
+  "theme_color": "#0B0C0E",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

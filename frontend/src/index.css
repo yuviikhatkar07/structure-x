@@ -1,0 +1,157 @@
+@import '@fontsource/barlow/400.css';
+@import '@fontsource/barlow/500.css';
+@import '@fontsource/barlow/600.css';
+@import '@fontsource/barlow-condensed/500.css';
+@import '@fontsource/barlow-condensed/600.css';
+@import '@fontsource/barlow-condensed/700.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 11 12 14;
+  --surface: 20 22 26;
+  --surface2: 28 31 36;
+  --line: 45 49 56;
+  --text: 235 237 240;
+  --muted: 138 146 158;
+  --accent: 255 106 19;
+  --ok: 34 197 94;
+  --warn: 245 158 11;
+  --bad: 239 68 68;
+  color-scheme: dark;
+}
+:root[data-theme='daylight'] {
+  --bg: 226 229 233;
+  --surface: 250 251 252;
+  --surface2: 238 240 243;
+  --line: 198 203 211;
+  --text: 18 21 26;
+  --muted: 88 97 110;
+  --accent: 214 78 0;
+  --ok: 21 148 70;
+  --warn: 194 105 4;
+  --bad: 205 32 32;
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  @apply bg-ink text-fg font-sans antialiased;
+  margin: 0;
+  overscroll-behavior-y: none;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+/* subtle technical grid behind everything */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgb(var(--line) / 0.18) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--line) / 0.18) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 75%);
+  z-index: 0;
+}
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+::selection {
+  background: rgb(var(--accent) / 0.4);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--line)) transparent;
+}
+
+@layer components {
+  .label {
+    @apply font-display text-[11px] font-semibold uppercase tracking-[0.16em] text-mute;
+  }
+  .num {
+    @apply font-mono tabular-nums;
+  }
+  .btn {
+    @apply inline-flex min-h-[40px] select-none items-center justify-center gap-2 border border-line bg-panel2 px-3.5 font-display text-[13px] font-semibold uppercase tracking-[0.12em] text-fg transition-colors hover:border-mute/60 hover:bg-line/40 active:bg-line/70 disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .btn-accent {
+    @apply border-accent bg-accent text-white hover:bg-accent/90 hover:border-accent;
+    color: #fff;
+  }
+  .btn-danger {
+    @apply border-bad bg-bad text-white hover:bg-bad/90 hover:border-bad;
+    color: #fff;
+  }
+  .btn-ghost {
+    @apply border-transparent bg-transparent hover:bg-line/40;
+  }
+  .input {
+    @apply min-h-[40px] w-full border border-line bg-ink px-3 text-sm text-fg outline-none placeholder:text-mute/70 focus:border-accent;
+  }
+  .touch-none-all {
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+}
+
+/* Range sliders: large thumb for gloved / touch use */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 36px;
+  background: transparent;
+  width: 100%;
+  touch-action: pan-y;
+}
+input[type='range']::-webkit-slider-runnable-track {
+  height: 6px;
+  background: rgb(var(--line));
+}
+input[type='range']::-moz-range-track {
+  height: 6px;
+  background: rgb(var(--line));
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 28px;
+  width: 20px;
+  margin-top: -11px;
+  background: rgb(var(--accent));
+  border: 2px solid rgb(var(--bg));
+  box-shadow: 0 0 0 1px rgb(var(--accent));
+}
+input[type='range']::-moz-range-thumb {
+  height: 28px;
+  width: 20px;
+  border-radius: 0;
+  background: rgb(var(--accent));
+  border: 2px solid rgb(var(--bg));
+}
+input[type='range']:disabled {
+  opacity: 0.4;
+}
+
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@media print {
+  body::before {
+    display: none;
+  }
+}

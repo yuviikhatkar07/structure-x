@@ -1,0 +1,17 @@
+{
+  "name": "structure-x",
+  "version": "1.0.0",
+  "private": true,
+  "description": "STRUCTURE X - Advanced Disaster Inspection System: command & control centre for an ESP32 inspection rover",
+  "workspaces": ["backend", "frontend"],
+  "engines": { "node": ">=18.18" },
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c yellow,cyan \"npm run dev -w backend\" \"npm run dev -w frontend\"",
+    "demo": "concurrently -k -n api,web -c yellow,cyan \"npm run demo -w backend\" \"npm run dev -w frontend\"",
+    "build": "npm run build -w frontend",
+    "start": "npm run start -w backend",
+    "start:demo": "npm run demo:start -w backend",
+    "typecheck": "npm run typecheck -w frontend"
+  },
+  "devDependencies": { "concurrently": "^9.0.0" }
+}
