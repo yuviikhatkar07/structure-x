@@ -64,3 +64,4 @@ Backend tests (no hardware needed): `npm test -w backend`.
 
 ## Honest status
 Backend unit/integration tests (risk, telemetry, settings, missions, control safety, watchdog, e-stop, flipper limits) pass against the simulated device. **Nothing here has been verified on physical hardware** — treat the first drive test as a commissioning test (see `docs/TROUBLESHOOTING.md`).
+# STURUCTURE---X

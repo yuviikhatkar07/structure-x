@@ -1,4 +1,5 @@
 import { getSettings } from './settings.js';
+import { MqttDevice } from './mqttDevice.js';
 
 /**
  * Hardware communication layer.
@@ -109,5 +110,7 @@ let simulated = null;
 
 export function getDevice() {
   if (getSettings().demoMode) return (simulated ??= new SimulatedDevice());
+  // If MQTT_HOST is set (Render env), talk to the rover through the MQTT broker instead of HTTP.
+  if (process.env.MQTT_HOST) return (hardware ??= new MqttDevice());
   return (hardware ??= new HardwareDevice());
 }
