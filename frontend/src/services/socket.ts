@@ -23,7 +23,12 @@ export class RobotSocket {
     this.closedByUser = false;
     this.setStatus('connecting');
     const proto = location.protocol === 'https:' ? 'wss' : 'ws';
-    const ws = new WebSocket(`${proto}://${location.host}/ws`);
+    const wsUrl =
+  location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+    ? `${proto}://${location.host}/ws`
+    : 'wss://structure-x.onrender.com/ws';
+
+const ws = new WebSocket(wsUrl);
     this.ws = ws;
     ws.onopen = () => {
       this.retry = 0;
